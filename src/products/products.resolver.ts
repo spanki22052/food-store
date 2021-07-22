@@ -30,4 +30,11 @@ export class ProductsResolver {
   ): Promise<Products> {
     return this.productsService.createProduct(createProductInput);
   }
+
+  @Mutation((returns) => Products)
+  removeProductById(@Args('id', { type: () => Int }) id: number) {
+    const removingProduct: Promise<Products> = this.productsService.findOne(id);
+    this.productsService.removeProduct(id);
+    return removingProduct;
+  }
 }

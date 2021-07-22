@@ -25,6 +25,11 @@ export class ProductsService {
     return this.productsRepository.findOneOrFail(id);
   }
 
+  async removeProduct(id: number) {
+    await this.productsRepository.delete({ id });
+    return this.productsRepository.find({ id: id });
+  }
+
   findByTitle(title: string): Promise<Products[]> {
     return this.productsRepository.find({ title: title });
   }
